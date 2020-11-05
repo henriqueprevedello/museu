@@ -10,7 +10,7 @@ $qryData = $PDO->prepare($dataSql);
 $qryData->execute();
 
 
-$instituicao = $qryData->fetch(PDO::FETCH_ASSOC);
+$instituicao = $qryData->fetchObject();
 $total = $qryCount->fetchColumn();
 
 include 'header.php'
@@ -23,31 +23,25 @@ include 'header.php'
 		</div>
 	</div>
 	<div class="row" style="margin-bottom: 20px;">
-		<div class="col-sm-12 text-center h2">
-			<a class="btn btn-primary" href="pedidosForm.php"><i class="fa fa-refresh"></i> Atualizar</a>
-		</div>
 	</div>
 </header>
 
-		<?php if ($total > 0) { ?>
-			
-				<tr>
-					<td><?= $instituicao['id_pedido']; ?></td>
-					<td><?= $instituicao['tx_nome']; ?></td>
-					<td><?= $instituicao['nr_telefone']; ?></td>
-					<td><?= $instituicao['tx_endereco']; ?></td>
-					<td>R$ <?= $instituicao['total']; ?></td>
-
-					<td class="actions text-right">
-						<a class="btn btn-sm btn-primary" href="detalhe.php?id=<?php echo $instituicao['id_pedido'] ?>">
-							<i class="fa fa-plus"></i> Visualizar
-						</a>
-					</td>
-				</tr>
-			
-		<?php } else { ?>
-				<p colspan="6">Nenhuma instiuição cadastrada.</p>
-		<?php } ?>
+<form action="addInstituicao.php" enctype="multipart/form-data" method="post">
+	<input type="hidden" name="id_instituicao" value="<?= ($total > 0) ? $instituicao->id_instituicao : "" ?>">
+	<div class="row">
+		<div class="form-group col-md-12">
+			<label for="nome">Nome:</label>
+			<input id="nome" type="text" class="form-control" placeholder="Nome" name="tx_nome" value="<?= ($total > 0) ? $instituicao->tx_nome : "" ?>">
+		</div>
+		<div class="form-group col-md-12">
+			<label for="descricao">Descrição:</label>
+			<textarea id="descricao" style="resize: none" rows="5"="text" class="form-control" placeholder="Descrição" name="tx_descricao"><?= ($total > 0) ? $instituicao->tx_descricao : "" ?></textarea>
+		</div>
+		<div class="col-md-12 text-center">
+			<button type="submit" class="btn btn-success">Salvar</button>
+		</div>
+	</div>
+</form>
 
 <?php
 include 'footer.php'
