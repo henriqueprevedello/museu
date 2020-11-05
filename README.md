@@ -9,36 +9,42 @@
 - Tela de check-in dos visitantes
 - Painel de admin para os funcionarios gerir todas as informações do museu;
 
+## Entidades
 
-- instituicao
+### Instituicao
 * nome
 * informações
 * lista de acervos
 
-- acervo
+### Acervo
 * descricao
 
-- espaço
+### Espaço
 * descricao
 * codigoAcervo
 
-- objeto
+### Objeto
 * nome
+* Descrição
 * status
-* data
+* data de criação
 * lista de anexos
 * codigoEspaço
 * lista de categorias
 
-- usuario
+### Anexo
+* Nome
+* Arquivo
+
+### Usuario
 * nome
 * email
 * senha
 
-- visitas
+### Visita
 * nome
 * codigoAcervo
 * data
 
--categorias
+### Categoria
 * nome
