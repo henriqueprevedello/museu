@@ -1,6 +1,6 @@
 <?php
 
-$PDO = new PDO('mysql:host=localhost;dbname=bar;charset=utf8', 'root', '');
+$PDO = new PDO('mysql:host=localhost;dbname=museu;charset=utf8', 'root', '');
 
 ini_set('display_errors', true);
 error_reporting(E_ALL);
