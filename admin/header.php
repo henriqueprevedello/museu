@@ -45,7 +45,7 @@
         </li>
 
         <li class="nav-item">
-          <a class="nav-link" href="pedidosForm.php" style="color: lightgreen;">Acervo</a>
+          <a class="nav-link" href="acervo.php" style="color: lightgreen;">Acervo</a>
         </li>
 
         <li class="nav-item">
