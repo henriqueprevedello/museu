@@ -24,7 +24,7 @@
   <nav class="navbar navbar-inverse navbar-fixed-top bg-dark" role="navigation">
     <div class="container">
       <div class="navbar-header">
-        <a href="#" style="text-decoration: none; color: lightskyblue; font-size: 24px; font-family: system; font-weight: 900;">BAR DO ZÉ</a>
+        <a href="#" style="text-decoration: none; color: lightskyblue; font-size: 24px; font-family: system; font-weight: 900;">MUSEU</a>
       </div>
       <div class="navbar-body">
         <img src="https://logospng.org/download/brahma/logo-brahma-2048.png" width="50px" alt="Brahma" class="rounded">

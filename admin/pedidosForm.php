@@ -20,7 +20,6 @@ $qryData = $PDO->prepare($dataSql);
 $qryData->execute();
 
 include 'header.php'
-
 ?>
 
 <header>
@@ -60,10 +59,7 @@ include 'header.php'
 						<a class="btn btn-sm btn-primary" href="detalhe.php?id=<?php echo $pedido['id_pedido'] ?>">
 							<i class="fa fa-plus"></i> Visualizar
 						</a>
-
-						
 					</td>
-					
 				</tr>
 			<?php } ?>
 		<?php } else { ?>
@@ -73,8 +69,6 @@ include 'header.php'
 		<?php } ?>
 	</tbody>
 </table>
-
-
 
 <?php
 include 'footer.php'

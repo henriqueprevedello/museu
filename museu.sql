@@ -4,7 +4,7 @@ CREATE DATABASE museu;
 CREATE TABLE `tb_instituicao` (
   `id_instituicao` int(11) NOT NULL,
   `tx_nome` varchar(100) NOT NULL,
-  `tx_descricao` varchar(200) NOT NULL,
+  `tx_descricao` varchar(200) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 ALTER TABLE `tb_instituicao`
