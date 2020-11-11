@@ -53,12 +53,14 @@ ALTER TABLE `tb_objeto`
 
 CREATE TABLE `tb_categoria` (
   `id_categoria` int(11) NOT NULL,
+  `cd_instituicao` int(11) NOT NULL,
   `tx_nome` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 ALTER TABLE `tb_categoria`
   ADD PRIMARY KEY (`id_categoria`),
-  MODIFY `id_categoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+  MODIFY `id_categoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1,
+   ADD CONSTRAINT `fk_categoria_instituicao` FOREIGN KEY ( `cd_instituicao` ) REFERENCES `tb_instituicao` ( `id_instituicao` );
 
 
 CREATE TABLE `tb_objeto_categoria` (
