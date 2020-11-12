@@ -104,7 +104,7 @@ CREATE TABLE `tb_visita` (
   `cd_acervo` int(11) NOT NULL,
   `tx_nome` varchar(100) NOT NULL,
   `nr_idade` int(11) NOT NULL,
-  `dt_visita` DATE
+  `dt_visita` TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 ALTER TABLE `tb_visita`
