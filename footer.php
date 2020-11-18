@@ -1,8 +1,8 @@
 </main> <!-- /container -->
 
 <footer class="footer" style="background-color: lightslategray; position: fixed; width: 100%; bottom: 0; ">
-  <div class="container">
-    <span style="color: lightgoldenrodyellow;">Programação web @ 2020</span>
+  <div class="container" style="display: flex; justify-content: center;">
+    <span style="color: white;">Felipe Finger & Henrique Prevedello @2020</span>
   </div>
 </footer>
 
