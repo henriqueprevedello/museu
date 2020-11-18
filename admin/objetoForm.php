@@ -8,7 +8,7 @@ $qryCount = $PDO->prepare($countSql);
 $qryCount->execute();
 $objeto = $qryCount->fetchObject();
 
-$espacoSql = "SELECT * FROM tb_espaco";
+$espacoSql = "SELECT * FROM tb_espaco WHERE id_espaco NOT IN (SELECT cd_espaco FROM tb_objeto)";
 $queryEspaco = $PDO->prepare($espacoSql);
 $queryEspaco->execute();
 
