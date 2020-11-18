@@ -8,7 +8,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" crossorigin="anonymous">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.2/css/font-awesome.min.css">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@500;700;900&display=swap" rel="stylesheet">
   <style>
+    * {
+      font-family: 'Roboto', sans-serif;
+    }
+
     body {
       padding-bottom: 20px;
     }
@@ -21,18 +27,40 @@
 
 <body>
 
-  <nav class="navbar navbar-inverse navbar-fixed-top bg-dark" role="navigation">
-    <div class="container">
-      <div class="navbar-header">
-        <a href="#" style="text-decoration: none; color: lightskyblue; font-size: 24px; font-family: system; font-weight: 900;">MUSEU</a>
-      </div>
-      <div class="navbar-body">
-        <img src="https://logospng.org/download/brahma/logo-brahma-2048.png" width="50px" alt="Brahma" class="rounded">
-      </div>
-  </nav>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#"><strong>MUSEU</strong></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
 
-  </div>
-  <!--/.navbar-collapse -->
-  </div>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="objeto.php">Objetos</a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" href="espaco.php">Espaços</a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" href="categoria.php">Categorias</a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" href="acervo.php">Acervo</a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" href="instituicao.php">Instituição</a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" href="visita.php">Visitas</a>
+        </li>
+      </ul>
+
+      <form class="form-inline my-2 my-lg-0">
+        <input class="form-control mr-sm-2" type="search" placeholder="Pesquisar.." aria-label="Search">
+        <button class="btn btn-success my-2 my-sm-0 mr-2" type="submit">Buscar no acervo</button>
+      </form>
+      |
+      <a type="button" href="admin/index.php" class="btn btn-secondary ml-2">Área do ADMIN</a>
+    </div>
   </nav>
   <main class="container">
