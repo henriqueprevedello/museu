@@ -38,7 +38,7 @@
             <ul class="navbar-nav mr-auto">
 
                 <li class="nav-item active">
-                    <a class="nav-link" href="index.php" style="color: lightgreen;">Objetos</a>
+                    <a class="nav-link" href="objeto.php" style="color: lightgreen;">Objetos</a>
                 </li>
 
                 <li class="nav-item">
