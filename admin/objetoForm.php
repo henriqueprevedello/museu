@@ -9,14 +9,25 @@ $qryCount->execute();
 $objeto = $qryCount->fetchObject();
 
 $espacoSql = "SELECT * FROM tb_espaco";
-$queryAcervo = $PDO->prepare($espacoSql);
-$queryAcervo->execute();
+$queryEspaco = $PDO->prepare($espacoSql);
+$queryEspaco->execute();
 
-$espacos = $queryAcervo->fetchAll(PDO::FETCH_ASSOC);
+$espacos = $queryEspaco->fetchAll(PDO::FETCH_ASSOC);
+
+$categoriaSql = "SELECT * FROM tb_categoria";
+$queryCategoria = $PDO->prepare($categoriaSql);
+$queryCategoria->execute();
+
+$categorias = $queryCategoria->fetchAll(PDO::FETCH_ASSOC);
 
 function espacoSelecionado($cd_espaco, $espaco)
 {
   return $cd_espaco == $espaco['id_espaco'] ?  "selected=selected" :  "";
+}
+
+function categoriaSelecionada($cd_categoria, $categoria)
+{
+  return $cd_categoria == $categoria['id_categoria'] ?  "selected=selected" :  "";
 }
 
 function statusSelecionado($objeto, $status)
@@ -36,6 +47,14 @@ function adquirirDataAtual()
 if ($espacos == 0) {
 
   header('Location: espaco.php');
+
+  exit;
+}
+
+
+if ($categorias == 0) {
+
+  header('Location: categoria.php');
 
   exit;
 }
@@ -88,6 +107,22 @@ include 'header.php';
         <option value='' <?php statusSelecionado($objeto, '') ?>>Selecione o status</option>
         <option value='1' <?php statusSelecionado($objeto, 1) ?>>Exposição</option>
         <option value='2' <?php statusSelecionado($objeto, 2) ?>>Manutenção</option>
+      </select>
+    </div>
+
+  </div>
+
+  <div class="row">
+
+    <div class="form-group col-md-12">
+      <select class="form-control" name="cd_categoria">
+        <option value=''>Selecione a categoria</option>
+        <?php
+        foreach ($categorias as &$categoria) {
+
+          echo "<option value='" . $categoria['id_categoria'] . "' " . categoriaSelecionada($cd_categoria, $categoria) . ">" . $categoria['tx_nome'] . "</option>";
+        }
+        ?>
       </select>
     </div>
 

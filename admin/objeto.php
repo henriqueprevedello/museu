@@ -18,11 +18,20 @@ function adquirirDescricaoEspaco($PDO, $objeto)
     echo $queryEspaco->fetchColumn();
 }
 
-function adquirirDescricaoStatus($codigoStatus){
+function adquirirDescricaoCategoria($PDO, $objeto)
+{
+    $categoriaSql = "SELECT tx_nome FROM tb_categoria where id_categoria = " . $objeto['cd_categoria'];
+    $queryCategoria = $PDO->prepare($categoriaSql);
+    $queryCategoria->execute();
+    echo $queryCategoria->fetchColumn();
+}
 
-    if($codigoStatus == 1){
+function adquirirDescricaoStatus($codigoStatus)
+{
+
+    if ($codigoStatus == 1) {
         return "Exposição";
-    } else if ($codigoStatus == 2){
+    } else if ($codigoStatus == 2) {
         return "Manutenção";
     }
 
@@ -53,31 +62,32 @@ include 'header.php'
 
             <th>Nome</th>
             <th>Descrição</th>
+            <th>Categoria</th>
             <th>Status</th>
             <th>Espaço</th>
-            
+
         </tr>
     </thead>
     <tbody>
         <?php if ($total > 0) { ?>
-        <?php while ($objeto = $qryData->fetch(PDO::FETCH_ASSOC)) { ?>
-        <tr>
-            <td><?= $objeto['tx_nome']; ?></td>
-            <td><?= $objeto['tx_descricao']; ?></td>
-            <td><?= adquirirDescricaoStatus($objeto['cd_status']); ?></td>
-            <td><?= adquirirDescricaoEspaco($PDO, $objeto) ?></td>
-            <td class="actions text-right">
-                <a href="objetoForm.php?id_objeto=<?= $objeto['id_objeto'] ?>&cd_espaco=<?= $objeto['cd_espaco'] ?>"
-                    class="btn btn-sm btn-warning">
-                    <i class="fa fa-pencil"></i> Editar
-                </a>
-            </td>
-        </tr>
-        <?php } ?>
+            <?php while ($objeto = $qryData->fetch(PDO::FETCH_ASSOC)) { ?>
+                <tr>
+                    <td><?= $objeto['tx_nome']; ?></td>
+                    <td><?= $objeto['tx_descricao']; ?></td>
+                    <td><?= adquirirDescricaoCategoria($PDO, $objeto) ?></td>
+                    <td><?= adquirirDescricaoStatus($objeto['cd_status']); ?></td>
+                    <td><?= adquirirDescricaoEspaco($PDO, $objeto) ?></td>
+                    <td class="actions text-right">
+                        <a href="objetoForm.php?id_objeto=<?= $objeto['id_objeto'] ?>&cd_espaco=<?= $objeto['cd_espaco'] ?>" class="btn btn-sm btn-warning">
+                            <i class="fa fa-pencil"></i> Editar
+                        </a>
+                    </td>
+                </tr>
+            <?php } ?>
         <?php } else { ?>
-        <tr>
-            <td colspan="6">Nenhum objeto cadastrado.</td>
-        </tr>
+            <tr>
+                <td colspan="6">Nenhum objeto cadastrado.</td>
+            </tr>
         <?php } ?>
     </tbody>
 </table>
