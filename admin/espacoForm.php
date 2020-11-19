@@ -2,7 +2,7 @@
 require '../conecta.php';
 
 $id_espaco = isset($_GET['id_espaco']) ? $_GET['id_espaco'] : null;
-$cd_acervo = isset($_GET['cd_acervo']) ? $_GET['cd_acervo'] : null;
+
 $countSql = "SELECT * FROM tb_espaco WHERE id_espaco=" . $id_espaco;
 $qryCount = $PDO->prepare($countSql);
 $qryCount->execute();
@@ -57,7 +57,7 @@ include 'header.php';
         <?php
         foreach ($acervos as &$acervo) {
 
-          echo "<option value='" . $acervo['id_acervo'] . "' " . acervoSelecionado($cd_acervo, $acervo) . ">" . $acervo['tx_descricao'] . "</option>";
+          echo "<option value='" . $acervo['id_acervo'] . "' " . acervoSelecionado($acervo['id_acervo'], $acervo) . ">" . $acervo['tx_descricao'] . "</option>";
         }
         ?>
       </select>

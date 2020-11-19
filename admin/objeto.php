@@ -33,6 +33,8 @@ function adquirirDescricaoStatus($codigoStatus)
         return "Exposição";
     } else if ($codigoStatus == 2) {
         return "Manutenção";
+    } else if ($codigoStatus == 3) {
+        return "Repouso";
     }
 
     return "Desconhecido";
@@ -82,7 +84,7 @@ include 'header.php'
                     <td><?= adquirirDescricaoEspaco($PDO, $objeto) ?></td>
                     <td><?= $objeto['dt_criacao']; ?></td>
                     <td class="actions text-right">
-                        <a href="objetoForm.php?id_objeto=<?= $objeto['id_objeto'] ?>&cd_espaco=<?= $objeto['cd_espaco'] ?>" class="btn btn-sm btn-warning">
+                        <a href="objetoForm.php?id_objeto=<?= $objeto['id_objeto'] ?>" class="btn btn-sm btn-warning">
                             <i class="fa fa-pencil"></i> Editar
                         </a>
                     </td>

@@ -1,14 +1,12 @@
-<?php
-require '../conecta.php';
+<?php require '../conecta.php';
 
 $id_objeto = isset($_GET['id_objeto']) ? $_GET['id_objeto'] : null;
-$cd_espaco = isset($_GET['cd_espaco']) ? $_GET['cd_espaco'] : null;
-$countSql = "SELECT * FROM tb_objeto WHERE id_objeto=" . $id_objeto;
-$qryCount = $PDO->prepare($countSql);
-$qryCount->execute();
-$objeto = $qryCount->fetchObject();
 
-$espacoSql = "SELECT * FROM tb_espaco WHERE id_espaco NOT IN (SELECT cd_espaco FROM tb_objeto)";
+$queryObjeto = $PDO->prepare("SELECT * FROM tb_objeto WHERE id_objeto=" . $id_objeto);
+$queryObjeto->execute();
+$objeto = $queryObjeto->fetchObject();
+
+$espacoSql = empty($id_objeto) ? "SELECT * FROM tb_espaco WHERE id_espaco NOT IN (SELECT cd_espaco FROM tb_objeto)" : "SELECT * FROM tb_espaco ";
 $queryEspaco = $PDO->prepare($espacoSql);
 $queryEspaco->execute();
 
@@ -38,11 +36,11 @@ function categoriaSelecionada($cd_categoria, $categoria)
 
 function statusSelecionado($objeto, $status)
 {
-  if (empty($objeto) &&  $status == '') {
+  if (empty($objeto->cd_status) &&  $status == '') {
     return "selected=selected";
   }
 
-  return empty($cd_status) || $cd_status == $status ?  "selected=selected" :  "";
+  return (empty($objeto->cd_status) || $objeto->cd_status == $status) ?  "selected=selected" :  "";
 }
 
 function adquirirDataAtual()
@@ -116,9 +114,10 @@ include 'header.php';
 
     <div class="form-group col-md-12">
       <select class="form-control" name="cd_status">
-        <option value='' <?php statusSelecionado($objeto, '') ?>>Selecione o status</option>
-        <option value='1' <?php statusSelecionado($objeto, 1) ?>>Exposição</option>
-        <option value='2' <?php statusSelecionado($objeto, 2) ?>>Manutenção</option>
+        <option value='' <?php echo statusSelecionado($objeto, '') ?>>Selecione o status</option>
+        <option value='1' <?php echo statusSelecionado($objeto, 1) ?>>Exposição</option>
+        <option value='2' <?php echo statusSelecionado($objeto, 2) ?>>Manutenção</option>
+        <option value='3' <?php echo statusSelecionado($objeto, 3) ?>>Repouso</option>
       </select>
     </div>
 
@@ -132,7 +131,7 @@ include 'header.php';
         <?php
         foreach ($categorias as &$categoria) {
 
-          echo "<option value='" . $categoria['id_categoria'] . "' " . categoriaSelecionada($cd_categoria, $categoria) . ">" . $categoria['tx_nome'] . "</option>";
+          echo "<option value='" . $categoria['id_categoria'] . "' " . categoriaSelecionada($objeto->cd_categoria, $categoria) . ">" . $categoria['tx_nome'] . "</option>";
         }
         ?>
       </select>
@@ -148,7 +147,7 @@ include 'header.php';
         <?php
         foreach ($espacos as &$espaco) {
 
-          echo "<option value='" . $espaco['id_espaco'] . "' " . espacoSelecionado($cd_espaco, $espaco) . ">" . $espaco['tx_descricao'] . "</option>";
+          echo "<option value='" . $espaco['id_espaco'] . "' " . espacoSelecionado($objeto->cd_espaco, $espaco) . ">" . $espaco['tx_descricao'] . "</option>";
         }
         ?>
       </select>
@@ -159,7 +158,7 @@ include 'header.php';
   <div class="row">
 
     <div class="form-group col-md-12">
-      <label for="exampleInputFile">Selecione arquivos</label>
+      <label for="exampleInputFile">Adicione arquivos</label>
       <input multiple type="file" name="inputArquivos[]" class="form-control-file" id="exampleInputFile" aria-describedby="fileHelp">
     </div>
 
