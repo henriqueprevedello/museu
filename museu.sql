@@ -66,8 +66,7 @@ ALTER TABLE `tb_objeto`
 CREATE TABLE `tb_anexo` (
   `id_anexo` int(11) NOT NULL,
   `tx_nome` varchar(64) NOT NULL,
-  `cd_objeto` int(11) NOT NULL,
-  `bl_arquivo` longblob DEFAULT NULL
+  `cd_objeto` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 ALTER TABLE `tb_anexo`

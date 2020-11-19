@@ -20,6 +20,12 @@ $queryCategoria->execute();
 
 $categorias = $queryCategoria->fetchAll(PDO::FETCH_ASSOC);
 
+$anexoSql = "SELECT * FROM tb_anexo WHERE cd_objeto =" . $id_objeto;
+$queryAnexo = $PDO->prepare($anexoSql);
+$queryAnexo->execute();
+
+$anexos = $queryAnexo->fetchAll(PDO::FETCH_ASSOC);
+
 function espacoSelecionado($cd_espaco, $espaco)
 {
   return $cd_espaco == $espaco['id_espaco'] ?  "selected=selected" :  "";
@@ -42,6 +48,12 @@ function statusSelecionado($objeto, $status)
 function adquirirDataAtual()
 {
   return date("Y-m-d");
+}
+
+function adquirirExtensaoArquivo($nomeArquivo)
+{
+
+  return end(explode(".", $nomeArquivo));
 }
 
 if ($espacos == 0) {
@@ -91,7 +103,7 @@ include 'header.php';
   </div>
 
   <div class="row">
-    <label for="example-date-input" class="col-3 col-form-label">Data de fabricação do objeto:</label>
+    <label for="example-date-input" class="col-12 col-form-label">Data de fabricação do objeto:</label>
   </div>
 
   <div class="row">
@@ -146,10 +158,42 @@ include 'header.php';
 
   <div class="row">
 
+    <?php
+    foreach ($anexos as &$anexo) {
+      echo '
+          <div class="card" style="justify-content: center;">';
+      if (strpos(strtolower($anexo['tx_nome']), ".jpg") || strpos(strtolower($anexo['tx_nome']), ".jpeg") || strpos(strtolower($anexo['tx_nome']), ".png")) {
+        echo '<img class="card-img-top" src="../uploadFiles/' . $anexo['tx_nome'] . '" style="width: 18rem;">';
+      } else if (strpos(strtolower($anexo['tx_nome']), ".mp4")) {
+        echo '<video width="320" height="240" controls style="width: 18rem;">
+                <source src="../uploadFiles/' . $anexo['tx_nome'] . '" type="video/mp4">
+              </video>';
+      } else if (strpos(strtolower($anexo['tx_nome']), ".mp3")) {
+        echo '<audio controls>
+                <source src="../uploadFiles/' . $anexo['tx_nome'] . '" type="audio/mp3">
+              </audio>';
+      } else {
+        echo '<div class="card-body">
+                <h5 class="card-title">' . $anexo['tx_nome'] . '</h5>
+                <object data="../uploadFiles/"' . $anexo['tx_nome'] . ' type="application/';
+        echo adquirirExtensaoArquivo($anexo['tx_nome']);
+        echo '" width="300" height="200">
+                        <a href="../uploadFiles/' . $anexo['tx_nome'] . '">' . $anexo['tx_nome'] . '</a>
+                      </object>
+                    </div>
+        ';
+      }
+      echo "</div>";
+    }
+    ?>
+
+  </div>
+
+  <div class="row">
+
     <div class="form-group col-md-12">
-      <label for="exampleInputFile">File input</label>
-      <input type="file" class="form-control-file" id="exampleInputFile" aria-describedby="fileHelp">
-      <small id="fileHelp" class="form-text text-muted">This is some placeholder block-level help text for the above input.</small>
+      <label for="exampleInputFile">Selecione arquivos</label>
+      <input multiple type="file" name="inputArquivos[]" class="form-control-file" id="exampleInputFile" aria-describedby="fileHelp">
     </div>
 
   </div>
