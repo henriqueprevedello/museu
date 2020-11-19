@@ -1,13 +1,13 @@
 # museu
 
-- Cadastro da instituição
-- Cadastro de acervo
-- Cadastro de objetos do acervo com categorias, status, imagens, documentos, videos, audios....
-- Cadastro de categorias
-- Cadastro de espaços
-- Tela de busca de dados do acervo, com vários filtros;
-- Tela de check-in dos visitantes
-- Painel de admin para os funcionarios gerir todas as informações do museu;
+- Feito - Cadastro da instituição
+- Feito - Cadastro de acervo
+- Feito - Cadastro de objetos do acervo com categorias, status, imagens, documentos, videos, audios....
+- Feito - Cadastro de categorias
+- Feito - Cadastro de espaços
+- Fazer - Tela de busca de dados do acervo, com vários filtros;
+- Fazer - Tela de check-in dos visitantes
+- Feito - Painel de admin para os funcionarios gerir todas as informações do museu;
 
 ## Entidades
 

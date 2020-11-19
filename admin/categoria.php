@@ -33,26 +33,26 @@ include 'header.php'
         <tr>
             <th width="10%">#</th>
             <th>Nome</th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
         <?php if ($total > 0) { ?>
-        <?php while ($categoria = $qryData->fetch(PDO::FETCH_ASSOC)) { ?>
-        <tr>
-            <td><?= $categoria['id_categoria']; ?></td>
-            <td><?= $categoria['tx_nome']; ?></td>
-            <td class="actions text-right">
-                <a href="categoriaForm.php?id_categoria=<?= $categoria['id_categoria'] ?>&op=2"
-                    class="btn btn-sm btn-warning">
-                    <i class="fa fa-pencil"></i> Editar
-                </a>
-            </td>
-        </tr>
-        <?php } ?>
+            <?php while ($categoria = $qryData->fetch(PDO::FETCH_ASSOC)) { ?>
+                <tr>
+                    <td><?= $categoria['id_categoria']; ?></td>
+                    <td><?= $categoria['tx_nome']; ?></td>
+                    <td class="actions text-right">
+                        <a href="categoriaForm.php?id_categoria=<?= $categoria['id_categoria'] ?>" class="btn btn-sm btn-warning">
+                            <i class="fa fa-pencil"></i> Editar
+                        </a>
+                    </td>
+                </tr>
+            <?php } ?>
         <?php } else { ?>
-        <tr>
-            <td colspan="6">Nenhum categoria cadastrada.</td>
-        </tr>
+            <tr>
+                <td colspan="6">Nenhum categoria cadastrada.</td>
+            </tr>
         <?php } ?>
     </tbody>
 </table>

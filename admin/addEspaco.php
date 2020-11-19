@@ -1,6 +1,4 @@
-<?php
-
-require_once '../conecta.php';
+<?php require_once '../conecta.php';
 
 $id_espaco = isset($_POST['id_espaco']) ? $_POST['id_espaco'] : null;
 $tx_descricao = isset($_POST['tx_descricao']) ? $_POST['tx_descricao'] : null;
@@ -8,9 +6,22 @@ $cd_acervo = isset($_POST['cd_acervo']) ? $_POST['cd_acervo'] : null;
 
 if (empty($tx_descricao) || empty($cd_acervo)) {
 ?>
-<script>
-alert("Preencha todos os campos.")
-</script>
+	<script>
+		alert("Preencha todos os campos.")
+	</script>
+<?php
+	exit;
+}
+
+$qryCount = $PDO->prepare("SELECT COUNT(*) FROM tb_espaco WHERE tx_descricao = " . $tx_descricao . " AND cd_acervo = " . $cd_acervo);
+$qryCount->execute();
+$total = $qryCount->fetchColumn();
+
+if ($total > 0) {
+?>
+	<script>
+		alert("Já existe espaço cadastrado com essa descrição.")
+	</script>
 <?php
 	exit;
 }
@@ -33,9 +44,9 @@ if ($qryAdd->execute()) {
 	header('Location: espaco.php');
 } else {
 ?>
-<script>
-alert("Erro ao cadastrar espaço.")
-</script>
+	<script>
+		alert("Erro ao cadastrar espaço.")
+	</script>
 <?php
 	print_r($qryAdd->errorInfo());
 }

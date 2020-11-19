@@ -8,21 +8,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" crossorigin="anonymous">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.2/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@500;700;900&display=swap" >
+  <link rel="stylesheet" href="./css/local.css">
   <link rel="preconnect" href="https://fonts.gstatic.com">
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@500;700;900&display=swap" rel="stylesheet">
-  <style>
-    * {
-      font-family: 'Roboto', sans-serif;
-    }
-
-    body {
-      padding-bottom: 20px;
-    }
-
-    .imgProduto {
-      max-height: 32px;
-    }
-  </style>
 </head>
 
 <body>

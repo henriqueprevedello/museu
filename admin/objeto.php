@@ -65,6 +65,9 @@ include 'header.php'
             <th>Categoria</th>
             <th>Status</th>
             <th>Espaço</th>
+            <th>Data</th>
+            <th></th>
+            <th></th>
 
         </tr>
     </thead>
@@ -73,10 +76,11 @@ include 'header.php'
             <?php while ($objeto = $qryData->fetch(PDO::FETCH_ASSOC)) { ?>
                 <tr>
                     <td><?= $objeto['tx_nome']; ?></td>
-                    <td><?= $objeto['tx_descricao']; ?></td>
+                    <td style="display: block;  width: 250px;  overflow: hidden;  white-space: nowrap;  text-overflow: ellipsis;"><?= $objeto['tx_descricao']; ?></td>
                     <td><?= adquirirDescricaoCategoria($PDO, $objeto) ?></td>
                     <td><?= adquirirDescricaoStatus($objeto['cd_status']); ?></td>
                     <td><?= adquirirDescricaoEspaco($PDO, $objeto) ?></td>
+                    <td><?= $objeto['dt_criacao']; ?></td>
                     <td class="actions text-right">
                         <a href="objetoForm.php?id_objeto=<?= $objeto['id_objeto'] ?>&cd_espaco=<?= $objeto['cd_espaco'] ?>" class="btn btn-sm btn-warning">
                             <i class="fa fa-pencil"></i> Editar
@@ -87,6 +91,7 @@ include 'header.php'
                             <i class="fa fa-trash"></i> Excluir
                         </a>
                     </td>
+
                 </tr>
             <?php } ?>
         <?php } else { ?>

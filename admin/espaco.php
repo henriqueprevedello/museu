@@ -42,6 +42,7 @@ include 'header.php'
             <th width="10%">#</th>
             <th>Descricao</th>
             <th>Acervo</th>
+            <th></th>
         </tr>
     </thead>
     <tbody>

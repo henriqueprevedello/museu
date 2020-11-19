@@ -33,6 +33,7 @@ include 'header.php'
 		<tr>
 			<th width="10%">#</th>
 			<th>Descricao</th>
+			<th></th>
 		</tr>
 	</thead>
 	<tbody>
@@ -42,7 +43,7 @@ include 'header.php'
 					<td><?= $acervo['id_acervo']; ?></td>
 					<td><?= $acervo['tx_descricao']; ?></td>
 					<td class="actions text-right">
-						<a href="acervoForm.php?id_acervo=<?= $acervo['id_acervo'] ?>&op=2" class="btn btn-sm btn-warning">
+						<a href="acervoForm.php?id_acervo=<?= $acervo['id_acervo'] ?>" class="btn btn-sm btn-warning">
 							<i class="fa fa-pencil"></i> Editar
 						</a>
 					</td>
