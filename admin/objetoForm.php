@@ -158,10 +158,18 @@ include 'header.php';
 
   <div class="row">
 
+    <div class="form-group col-md-12">
+      <label for="exampleInputFile">Selecione arquivos</label>
+      <input multiple type="file" name="inputArquivos[]" class="form-control-file" id="exampleInputFile" aria-describedby="fileHelp">
+    </div>
+
+  </div>
+
+  <div class="row">
+
     <?php
     foreach ($anexos as &$anexo) {
-      echo '
-          <div class="card" style="justify-content: center;">';
+      echo '<div class="card" style="justify-content: center;">';
       if (strpos(strtolower($anexo['tx_nome']), ".jpg") || strpos(strtolower($anexo['tx_nome']), ".jpeg") || strpos(strtolower($anexo['tx_nome']), ".png")) {
         echo '<img class="card-img-top" src="../uploadFiles/' . $anexo['tx_nome'] . '" style="width: 18rem;">';
       } else if (strpos(strtolower($anexo['tx_nome']), ".mp4")) {
@@ -174,7 +182,7 @@ include 'header.php';
               </audio>';
       } else {
         echo '<div class="card-body">
-                <h5 class="card-title">' . $anexo['tx_nome'] . '</h5>
+                
                 <object data="../uploadFiles/"' . $anexo['tx_nome'] . ' type="application/';
         echo adquirirExtensaoArquivo($anexo['tx_nome']);
         echo '" width="300" height="200">
@@ -189,14 +197,7 @@ include 'header.php';
 
   </div>
 
-  <div class="row">
 
-    <div class="form-group col-md-12">
-      <label for="exampleInputFile">Selecione arquivos</label>
-      <input multiple type="file" name="inputArquivos[]" class="form-control-file" id="exampleInputFile" aria-describedby="fileHelp">
-    </div>
-
-  </div>
 
   <div class="row">
 

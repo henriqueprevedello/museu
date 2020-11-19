@@ -82,6 +82,11 @@ include 'header.php'
                             <i class="fa fa-pencil"></i> Editar
                         </a>
                     </td>
+                    <td class="actions text-right">
+                        <a href="removeObjeto.php?id_objeto=<?= $objeto['id_objeto'] ?>" class="btn btn-sm btn-danger">
+                            <i class="fa fa-trash"></i> Excluir
+                        </a>
+                    </td>
                 </tr>
             <?php } ?>
         <?php } else { ?>

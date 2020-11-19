@@ -1,6 +1,4 @@
-<?php
-
-require_once '../conecta.php';
+<?php require_once '../conecta.php';
 
 $id_objeto = isset($_POST['id_objeto']) ? $_POST['id_objeto'] : null;
 $tx_nome = isset($_POST['tx_nome']) ? $_POST['tx_nome'] : null;
@@ -11,22 +9,14 @@ $dt_criacao = isset($_POST['dt_criacao']) ? $_POST['dt_criacao'] : null;
 $cd_categoria = isset($_POST['cd_categoria']) ? $_POST['cd_categoria'] : null;
 $totalArquivos = count($_FILES['inputArquivos']['name']);
 
-
-
-
-
-
 if (empty($tx_nome) || empty($tx_descricao) || empty($cd_status) || empty($cd_categoria)) {
 ?>
 	<script>
 		alert("Preencha todos os campos.")
 	</script>
-<?php
+	<?php
 	exit;
 }
-
-
-
 
 if ($id_objeto != null) {
 	$sql = "UPDATE tb_objeto SET tx_nome = :tx_nome, tx_descricao = :tx_descricao, cd_status = :cd_status, cd_espaco = :cd_espaco, dt_criacao = :dt_criacao, cd_categoria = :cd_categoria  WHERE id_objeto = :id_objeto";
@@ -41,13 +31,13 @@ if ($id_objeto != null) {
 } else {
 
 	if (empty($cd_espaco)) {
-		?>
-			<script>
-				alert("Preencha todos os campos.")
-			</script>
-		<?php
-			exit;
-		}
+	?>
+		<script>
+			alert("Preencha todos os campos.")
+		</script>
+	<?php
+		exit;
+	}
 
 	$sql = "INSERT INTO tb_objeto(tx_nome, tx_descricao, cd_status, cd_espaco, dt_criacao, cd_categoria) VALUES (:tx_nome, :tx_descricao, :cd_status, :cd_espaco, :dt_criacao, :cd_categoria )";
 	$qryAdd = $PDO->prepare($sql);
@@ -66,13 +56,13 @@ if ($qryAdd->execute()) {
 	if ($totalArquivos > 0) {
 
 		for ($i = 0; $i < $totalArquivos; $i++) {
-	
+
 			$tmpFilePath = $_FILES['inputArquivos']['tmp_name'][$i];
-	
+
 			if ($tmpFilePath != "") {
-	
+
 				$newFilePath = "../uploadFiles/" . $_FILES['inputArquivos']['name'][$i];
-	
+
 				if (move_uploaded_file($tmpFilePath, $newFilePath)) {
 
 					$sqlAnexo = "INSERT INTO tb_anexo(tx_nome, cd_objeto) VALUES (:tx_nome, :cd_objeto)";
@@ -86,9 +76,9 @@ if ($qryAdd->execute()) {
 		}
 	}
 
-	 header('Location: objeto.php');
+	header('Location: objeto.php');
 } else {
-?>
+	?>
 	<script>
 		alert("Erro ao cadastrar objeto.")
 	</script>
