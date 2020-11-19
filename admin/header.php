@@ -28,7 +28,7 @@
 
 <body>
 
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
         <a class="navbar-brand" href="#"><strong>ADMIN MUSEU</strong></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -56,7 +56,7 @@
                 </li>
             </ul>
 
-            <a type="button" href="../index.php" class="btn btn-secondary ml-2">Área do vísitante</a>
+            <a type="button" href="../index.php" class="btn btn-light ml-2">Área do vísitante</a>
         </div>
     </nav>
 
