@@ -6,7 +6,7 @@
 - Feito - Cadastro de categorias
 - Feito - Cadastro de espaços
 - Fazer - Tela de busca de dados do acervo, com vários filtros;
-- Fazer - Tela de check-in dos visitantes
+- Feito - Tela de check-in dos visitantes
 - Feito - Painel de admin para os funcionarios gerir todas as informações do museu;
 
 ## Entidades

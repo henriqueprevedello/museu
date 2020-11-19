@@ -16,7 +16,7 @@
 <body>
 
   <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-    <a class="navbar-brand" href="#"><strong>MUSEU</strong></a>
+    <a class="navbar-brand" href="index.php"><strong>MUSEU</strong></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -24,30 +24,13 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item active">
-          <a class="nav-link" href="objeto.php">Objetos</a>
+          <a class="nav-link" href="index.php">Dados</a>
         </li>
         <li class="nav-item active">
-          <a class="nav-link" href="espaco.php">Espaços</a>
-        </li>
-        <li class="nav-item active">
-          <a class="nav-link" href="categoria.php">Categorias</a>
-        </li>
-        <li class="nav-item active">
-          <a class="nav-link" href="acervo.php">Acervo</a>
-        </li>
-        <li class="nav-item active">
-          <a class="nav-link" href="instituicao.php">Instituição</a>
-        </li>
-        <li class="nav-item active">
-          <a class="nav-link" href="visita.php">Visitas</a>
+          <a class="nav-link" href="checkin.php">Check-in</a>
         </li>
       </ul>
-
-      <form class="form-inline my-2 my-lg-0">
-        <input class="form-control mr-sm-2" type="search" placeholder="Pesquisar.." aria-label="Search">
-        <button class="btn btn-success my-2 my-sm-0 mr-2" type="submit">Buscar no acervo</button>
-      </form>
-      |
+      
       <a type="button" href="admin/index.php" class="btn btn-light ml-2">Área do ADMIN</a>
     </div>
   </nav>
