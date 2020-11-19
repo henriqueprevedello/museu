@@ -9,7 +9,6 @@ $objeto = $queryObjeto->fetchObject();
 $espacoSql = empty($id_objeto) ? "SELECT * FROM tb_espaco WHERE id_espaco NOT IN (SELECT cd_espaco FROM tb_objeto)" : "SELECT * FROM tb_espaco ";
 $queryEspaco = $PDO->prepare($espacoSql);
 $queryEspaco->execute();
-
 $espacos = $queryEspaco->fetchAll(PDO::FETCH_ASSOC);
 
 $categoriaSql = "SELECT * FROM tb_categoria";
@@ -36,11 +35,15 @@ function categoriaSelecionada($cd_categoria, $categoria)
 
 function statusSelecionado($objeto, $status)
 {
-  if (empty($objeto->cd_status) &&  $status == '') {
-    return "selected=selected";
+  if (empty($objeto->cd_status)) {
+    if(  $status == ''){
+      return "selected=selected";
+
+    }
+    return "";
   }
 
-  return (empty($objeto->cd_status) || $objeto->cd_status == $status) ?  "selected=selected" :  "";
+  return ( $objeto->cd_status == $status) ?  "selected=selected" :  "";
 }
 
 function adquirirDataAtual()
