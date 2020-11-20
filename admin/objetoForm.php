@@ -14,7 +14,6 @@ $espacos = $queryEspaco->fetchAll(PDO::FETCH_ASSOC);
 $categoriaSql = "SELECT * FROM tb_categoria";
 $queryCategoria = $PDO->prepare($categoriaSql);
 $queryCategoria->execute();
-
 $categorias = $queryCategoria->fetchAll(PDO::FETCH_ASSOC);
 
 $anexoSql = "SELECT * FROM tb_anexo WHERE cd_objeto =" . $id_objeto;

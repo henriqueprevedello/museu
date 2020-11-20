@@ -1,5 +1,11 @@
 <?php require './conecta.php';
 
+$tx_descricao = isset($_POST['tx_descricao']) ? $_POST['tx_descricao'] : null;
+$cd_categoria = isset($_POST['cd_categoria']) ? $_POST['cd_categoria'] : null;
+$cd_status = isset($_POST['cd_status']) ? $_POST['cd_status'] : null;
+$cd_acervo = isset($_POST['cd_acervo']) ? $_POST['cd_acervo'] : null;
+$cd_espaco = isset($_POST['cd_espaco']) ? $_POST['cd_espaco'] : null;
+
 function adquirirDescricaoEspaco($PDO, $objeto)
 {
     $espacoSql = "SELECT tx_descricao FROM tb_espaco where id_espaco = " . $objeto['cd_espaco'];
@@ -35,14 +41,21 @@ $queryEspaco = $PDO->prepare($espacoSql);
 $queryEspaco->execute();
 $espacos = $queryEspaco->fetchAll(PDO::FETCH_ASSOC);
 
-$countSql = "SELECT COUNT(*) AS total FROM tb_objeto ORDER BY id_objeto ASC";
-$qryCount = $PDO->prepare($countSql);
-$qryCount->execute();
-$total = $qryCount->fetchColumn();
+$categoriaSql = "SELECT * FROM tb_categoria";
+$queryCategoria = $PDO->prepare($categoriaSql);
+$queryCategoria->execute();
+$categorias = $queryCategoria->fetchAll(PDO::FETCH_ASSOC);
 
-$dataSql = "SELECT * FROM tb_objeto ORDER BY id_objeto ASC";
-$qryData = $PDO->prepare($dataSql);
-$qryData->execute();
+$queryAcervo = $PDO->prepare("SELECT * FROM tb_acervo");
+$queryAcervo->execute();
+$acervos = $queryAcervo->fetchAll(PDO::FETCH_ASSOC);
+
+$queryCountObj = $PDO->prepare("SELECT COUNT(*) AS total FROM tb_objeto ORDER BY id_objeto ASC");
+$queryCountObj->execute();
+$totalObjetos = $queryCountObj->fetchColumn();
+
+$queryBuscaObjetos = $PDO->prepare("SELECT * FROM tb_objeto ORDER BY id_objeto ASC");
+$queryBuscaObjetos->execute();
 
 include 'header.php'; ?>
 
@@ -53,8 +66,45 @@ Filtros:
 <div class="row">
 
     <div class="form-group col-md-12">
+        <input type="text" class="form-control" placeholder="Buscar por nome ou descrição" name="tx_descricao">
+    </div>
+
+</div>
+
+<div class="row">
+
+    <div class="form-group col-md-3">
+        <select class="form-control" name="cd_categoria">
+            <option value=''>Filtrar por categoria</option>
+            <?php
+            foreach ($categorias as &$categoria) {
+                echo "<option value='" . $categoria['id_categoria'] . "' >" . $categoria['tx_nome'] . "</option>";
+            }
+            ?>
+        </select>
+    </div>
+
+    <div class="form-group col-md-3">
+        <select class="form-control" name="cd_status">
+            <option value='' selected="selected">Filtrar por status</option>
+            <option value='1'>Exposição</option>
+            <option value='2'>Manutenção</option>
+            <option value='3'>Repouso</option>
+        </select>
+    </div>
+
+    <div class="form-group col-md-3">
+        <select class="form-control" name="cd_acervo">
+            <option value=''>Filtrar por acervo</option>
+            <?php foreach ($acervos as &$acervo) {
+                echo "<option value='" . $acervo['id_acervo'] . "' >" . $acervo['tx_descricao'] . "</option>";
+            } ?>
+        </select>
+    </div>
+
+    <div class="form-group col-md-3">
         <select class="form-control" name="cd_espaco">
-            <option value=''>Selecione o espaço</option>
+            <option value=''>Filtrar por espaço</option>
             <?php
             foreach ($espacos as &$espaco) {
 
@@ -89,8 +139,8 @@ Filtros:
         </tr>
     </thead>
     <tbody>
-        <?php if ($total > 0) { ?>
-            <?php while ($objeto = $qryData->fetch(PDO::FETCH_ASSOC)) { ?>
+        <?php if ($totalObjetos > 0) { ?>
+            <?php while ($objeto = $queryBuscaObjetos->fetch(PDO::FETCH_ASSOC)) { ?>
                 <tr>
                     <td><?= $objeto['tx_nome']; ?></td>
                     <td style="display: block;  width: 250px;  overflow: hidden;  white-space: nowrap;  text-overflow: ellipsis;"><?= $objeto['tx_descricao']; ?></td>
