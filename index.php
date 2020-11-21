@@ -8,7 +8,7 @@ $cd_espaco = isset($_POST['cd_espaco']) ? $_POST['cd_espaco'] : null;
 $tx_ordenacao = isset($_POST['tx_ordenacao']) ? $_POST['tx_ordenacao'] : null;
 $tx_ordenado = isset($_POST['tx_ordenado']) ? $_POST['tx_ordenado'] : null;
 
-$sqlBuscaObjetos = "SELECT * FROM tb_objeto";
+$sqlBuscaObjetos = "SELECT tb_objeto.* FROM tb_objeto";
 $aplicadoWhere = false;
 $aplicadoOrder = false;
 
@@ -19,9 +19,9 @@ if (!empty($cd_acervo)) {
 
 if (!empty($tx_descricao)) {
     if ($aplicadoWhere) {
-        $sqlBuscaObjetos = $sqlBuscaObjetos . " AND tx_nome LIKE '%" . $tx_descricao . "%' OR tx_descricao LIKE '%" . $tx_descricao . "%'";
+        $sqlBuscaObjetos = $sqlBuscaObjetos . " AND tb_objeto.tx_nome LIKE '%" . $tx_descricao . "%' OR tb_objeto.tx_descricao LIKE '%" . $tx_descricao . "%'";
     } else {
-        $sqlBuscaObjetos = $sqlBuscaObjetos . " WHERE tx_nome LIKE '%" . $tx_descricao . "%' OR tx_descricao LIKE '%" . $tx_descricao . "%'";
+        $sqlBuscaObjetos = $sqlBuscaObjetos . " WHERE tb_objeto.tx_nome LIKE '%" . $tx_descricao . "%' OR tb_objeto.tx_descricao LIKE '%" . $tx_descricao . "%'";
         $aplicadoWhere = true;
     }
 }
@@ -114,6 +114,11 @@ function adquirirDescricaoCategoria($PDO, $objeto)
 function categoriaSelecionada($cd_categoria, $categoria)
 {
     return $cd_categoria == $categoria['id_categoria'] ?  "selected=selected" :  "";
+}
+
+function espacoSelecionado($cd_espaco, $espaco)
+{
+    return $cd_espaco == $espaco['id_espaco'] ?  "selected=selected" :  "";
 }
 
 function statusSelecionado($cd_status, $status)
@@ -235,7 +240,7 @@ Filtros:
                 <option value=''>Filtrar por categoria</option>
                 <?php
                 foreach ($categorias as &$categoria) {
-                    echo "<option value='" . $categoria['id_categoria'] . "' " . categoriaSelecionada($objeto->cd_categoria, $categoria) . ">" . $categoria['tx_nome'] . "</option>";
+                    echo "<option value='" . $categoria['id_categoria'] . "' " . categoriaSelecionada($cd_categoria, $categoria) . ">" . $categoria['tx_nome'] . "</option>";
                 }
                 ?>
             </select>
@@ -265,7 +270,7 @@ Filtros:
                 <?php
                 foreach ($espacos as &$espaco) {
 
-                    echo "<option value='" . $espaco['id_espaco'] . "'>" . $espaco['tx_descricao'] . "</option>";
+                    echo "<option value='" . $espaco['id_espaco'] . "' " . espacoSelecionado($cd_espaco, $espaco) . ">" . $espaco['tx_descricao'] . "</option>";
                 }
                 ?>
             </select>
