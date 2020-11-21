@@ -277,8 +277,11 @@ Filtros:
         </div>
 
     </div>
+    <div class="col-sm-12 text-center">
 
-    <button type="submit" class="btn btn-success">Aplicar filtros</button>
+        <button type="submit" class="btn btn-success">Aplicar filtros</button>
+
+    </div>
 
 </form>
 
