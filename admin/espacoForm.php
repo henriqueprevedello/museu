@@ -14,9 +14,9 @@ $queryAcervo->execute();
 
 $acervos = $queryAcervo->fetchAll(PDO::FETCH_ASSOC);
 
-function acervoSelecionado($cd_acervo, $acervo)
+function acervoSelecionado($cd_acervo, $espaco)
 {
-  return $cd_acervo == $acervo['id_acervo'] ?  "selected=selected" :  "";
+  return $cd_acervo == $espaco->cd_acervo ?  "selected=selected" :  "";
 }
 
 if ($acervos == 0) {
@@ -57,7 +57,7 @@ include 'header.php';
         <?php
         foreach ($acervos as &$acervo) {
 
-          echo "<option value='" . $acervo['id_acervo'] . "' " . acervoSelecionado($acervo['id_acervo'], $acervo) . ">" . $acervo['tx_descricao'] . "</option>";
+          echo "<option value='" . $acervo['id_acervo'] . "' " . acervoSelecionado($acervo['id_acervo'], $espaco) . ">" . $acervo['tx_descricao'] . "</option>";
         }
         ?>
       </select>

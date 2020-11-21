@@ -53,7 +53,7 @@ include 'header.php'
             <td><?= $espaco['tx_descricao']; ?></td>
             <td><?= adquirirNomeAcervo($PDO, $espaco) ?></td>
             <td class="actions text-right">
-                <a href="espacoForm.php?id_espaco=<?= $espaco['id_espaco'] ?>&cd_acervo=<?= $espaco['cd_acervo'] ?>"
+                <a href="espacoForm.php?id_espaco=<?= $espaco['id_espaco'] ?>"
                     class="btn btn-sm btn-warning">
                     <i class="fa fa-pencil"></i> Editar
                 </a>

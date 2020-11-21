@@ -12,9 +12,18 @@ $sqlBuscaObjetos = "SELECT * FROM tb_objeto";
 $aplicadoWhere = false;
 $aplicadoOrder = false;
 
-if (!empty($tx_descricao)) {
-    $sqlBuscaObjetos = $sqlBuscaObjetos . " WHERE tx_nome LIKE '%" . $tx_descricao . "%' OR tx_descricao LIKE '%" . $tx_descricao . "%'";
+if (!empty($cd_acervo)) {
+    $sqlBuscaObjetos = $sqlBuscaObjetos . " INNER JOIN tb_espaco AS espaco ON cd_espaco = espaco.id_espaco WHERE espaco.cd_acervo = " . $cd_acervo;
     $aplicadoWhere = true;
+}
+
+if (!empty($tx_descricao)) {
+    if ($aplicadoWhere) {
+        $sqlBuscaObjetos = $sqlBuscaObjetos . " AND tx_nome LIKE '%" . $tx_descricao . "%' OR tx_descricao LIKE '%" . $tx_descricao . "%'";
+    } else {
+        $sqlBuscaObjetos = $sqlBuscaObjetos . " WHERE tx_nome LIKE '%" . $tx_descricao . "%' OR tx_descricao LIKE '%" . $tx_descricao . "%'";
+        $aplicadoWhere = true;
+    }
 }
 
 if (!empty($cd_categoria)) {
@@ -35,14 +44,7 @@ if (!empty($cd_status)) {
     }
 }
 
-if (!empty($cd_acervo)) {
-    if ($aplicadoWhere) {
-        $sqlBuscaObjetos = $sqlBuscaObjetos . " AND cd_acervo = " . $cd_acervo;
-    } else {
-        $sqlBuscaObjetos = $sqlBuscaObjetos . " WHERE cd_acervo = " . $cd_acervo;
-        $aplicadoWhere = true;
-    }
-}
+
 
 if (!empty($cd_espaco)) {
     if ($aplicadoWhere) {
@@ -69,7 +71,15 @@ if (!empty($tx_ordenado)) {
 }
 
 // TODO Alguns input não tão dando autocomplete apos aplicar o filtro
-echo $sqlBuscaObjetos;
+// echo $sqlBuscaObjetos;
+
+function adquirirDescricaoAcervo($PDO, $objeto)
+{
+    $acervoSql = "SELECT acervo.tx_descricao FROM tb_acervo AS acervo INNER JOIN tb_espaco AS espaco ON espaco.cd_acervo = acervo.id_acervo WHERE espaco.id_espaco = " . $objeto['cd_espaco'];
+    $queryAcervo = $PDO->prepare($acervoSql);
+    $queryAcervo->execute();
+    echo $queryAcervo->fetchColumn();
+}
 
 function adquirirDescricaoEspaco($PDO, $objeto)
 {
@@ -140,6 +150,18 @@ function ordenadoSelecionado($tx_ordenado, $ordenado)
     }
 
     return ($tx_ordenado == $ordenado) ?  "selected=selected" :  "";
+}
+
+function acervoSelecionado($cd_acervo, $acervo)
+{
+    if (empty($cd_acervo)) {
+        if ($acervo == '') {
+            return "selected=selected";
+        }
+        return "";
+    }
+
+    return ($cd_acervo == $acervo) ?  "selected=selected" :  "";
 }
 
 $espacoSql = "SELECT * FROM tb_espaco";
@@ -232,7 +254,7 @@ Filtros:
             <select class="form-control" name="cd_acervo">
                 <option value=''>Filtrar por acervo</option>
                 <?php foreach ($acervos as &$acervo) {
-                    echo "<option value='" . $acervo['id_acervo'] . "' >" . $acervo['tx_descricao'] . "</option>";
+                    echo "<option value='" . $acervo['id_acervo'] . "' " . acervoSelecionado($cd_acervo, $acervo['id_acervo']) . ">" . $acervo['tx_descricao'] . "</option>";
                 } ?>
             </select>
         </div>
@@ -268,8 +290,6 @@ Filtros:
             <th>Acervo</th>
             <th>Espaço</th>
             <th>Data</th>
-            <th></th>
-            <th></th>
 
         </tr>
     </thead>
@@ -281,20 +301,9 @@ Filtros:
                     <td style="display: block;  width: 250px;  overflow: hidden;  white-space: nowrap;  text-overflow: ellipsis;"><?= $objeto['tx_descricao']; ?></td>
                     <td><?= adquirirDescricaoCategoria($PDO, $objeto) ?></td>
                     <td><?= adquirirDescricaoStatus($objeto['cd_status']); ?></td>
-                    <td>fazer acervo</td>
+                    <td><?= adquirirDescricaoAcervo($PDO, $objeto) ?></td>
                     <td><?= adquirirDescricaoEspaco($PDO, $objeto) ?></td>
                     <td><?= $objeto['dt_criacao']; ?></td>
-                    <td class="actions text-right">
-                        <a href="objetoForm.php?id_objeto=<?= $objeto['id_objeto'] ?>" class="btn btn-sm btn-warning">
-                            <i class="fa fa-pencil"></i> Editar
-                        </a>
-                    </td>
-                    <td class="actions text-right">
-                        <a href="removeObjeto.php?id_objeto=<?= $objeto['id_objeto'] ?>" class="btn btn-sm btn-danger">
-                            <i class="fa fa-trash"></i> Excluir
-                        </a>
-                    </td>
-
                 </tr>
             <?php } ?>
         <?php } else { ?>

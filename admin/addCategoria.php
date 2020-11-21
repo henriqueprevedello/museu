@@ -12,9 +12,22 @@ $instituicao = $qryInstit->fetch(PDO::FETCH_ASSOC);
 
 if (empty($tx_nome)) {
 ?>
-<script>
-alert("Preencha todos os campos.")
-</script>
+	<script>
+		alert("Preencha todos os campos.")
+	</script>
+<?php
+	exit;
+}
+
+$queryNomeCategoria = $PDO->prepare("SELECT COUNT(*) FROM tb_categoria WHERE tx_nome = '" . $tx_nome . "'");
+$queryNomeCategoria->execute();
+$existeCategoria = $queryNomeCategoria->fetchColumn();
+
+if ($existeCategoria > 0) {
+?>
+	<script>
+		alert("Já existe categoria cadastrada com esse nome.")
+	</script>
 <?php
 	exit;
 }
@@ -36,9 +49,9 @@ if ($qryAdd->execute()) {
 	header('Location: categoria.php');
 } else {
 ?>
-<script>
-alert("Erro ao cadastrar categoria.")
-</script>
+	<script>
+		alert("Erro ao cadastrar categoria.")
+	</script>
 <?php
 	print_r($qryAdd->errorInfo());
 }

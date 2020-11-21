@@ -6,13 +6,11 @@ $queryObjeto = $PDO->prepare("SELECT * FROM tb_objeto WHERE id_objeto=" . $id_ob
 $queryObjeto->execute();
 $objeto = $queryObjeto->fetchObject();
 
-$espacoSql = empty($id_objeto) ? "SELECT * FROM tb_espaco WHERE id_espaco NOT IN (SELECT cd_espaco FROM tb_objeto)" : "SELECT * FROM tb_espaco ";
-$queryEspaco = $PDO->prepare($espacoSql);
+$queryEspaco = $PDO->prepare("SELECT * FROM tb_espaco");
 $queryEspaco->execute();
 $espacos = $queryEspaco->fetchAll(PDO::FETCH_ASSOC);
 
-$categoriaSql = "SELECT * FROM tb_categoria";
-$queryCategoria = $PDO->prepare($categoriaSql);
+$queryCategoria = $PDO->prepare("SELECT * FROM tb_categoria");
 $queryCategoria->execute();
 $categorias = $queryCategoria->fetchAll(PDO::FETCH_ASSOC);
 
