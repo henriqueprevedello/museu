@@ -41,6 +41,9 @@
                     <a class="nav-link" href="instituicao.php">Instituição</a>
                 </li>
                 <li class="nav-item active">
+                    <a class="nav-link" href="funcionario.php">Funcionários</a>
+                </li>
+                <li class="nav-item active">
                     <a class="nav-link" href="visita.php">Visitas</a>
                 </li>
             </ul>

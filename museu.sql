@@ -99,3 +99,15 @@ ALTER TABLE `tb_visita`
   ADD PRIMARY KEY (`id_visita`),
   MODIFY `id_visita` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1,
   ADD CONSTRAINT `fk_visita_acervo` FOREIGN KEY ( `cd_acervo` ) REFERENCES `tb_acervo` ( `id_acervo` );
+
+CREATE TABLE `tb_funcionario` (
+  `id_funcionario` int(11) NOT NULL,
+  `cd_instituicao` int(11) NOT NULL,
+  `tx_nome` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+ALTER TABLE `tb_funcionario`
+  ADD PRIMARY KEY (`id_funcionario`),
+  MODIFY `id_funcionario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1,
+  ADD CONSTRAINT `fk_funcionario_instituicao` FOREIGN KEY ( `cd_instituicao` ) REFERENCES `tb_instituicao` ( `id_instituicao` );
+

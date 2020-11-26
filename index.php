@@ -187,6 +187,7 @@ $queryCountObj = $PDO->prepare("SELECT COUNT(*) AS total FROM tb_objeto ORDER BY
 $queryCountObj->execute();
 $totalObjetos = $queryCountObj->fetchColumn();
 
+
 $queryBuscaObjetos = $PDO->prepare($sqlBuscaObjetos);
 $queryBuscaObjetos->execute();
 
@@ -298,6 +299,7 @@ Filtros:
             <th>Acervo</th>
             <th>Espaço</th>
             <th>Data</th>
+            <th></th>
 
         </tr>
     </thead>
@@ -312,6 +314,11 @@ Filtros:
                     <td><?= adquirirDescricaoAcervo($PDO, $objeto) ?></td>
                     <td><?= adquirirDescricaoEspaco($PDO, $objeto) ?></td>
                     <td><?= $objeto['dt_criacao']; ?></td>
+                    <td class="actions text-right">
+                        <a href="objetoDetalhes.php?id_objeto=<?= $objeto['id_objeto'] ?>" class="btn btn-sm btn-success">
+                            <i class="fa fa-eye"></i>
+                        </a>
+                    </td>
                 </tr>
             <?php } ?>
         <?php } else { ?>
